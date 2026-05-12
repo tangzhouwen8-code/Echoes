@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS=--max-old-space-size=2048 next dev --webpack --hostname 127.0.0.1 -p 3000",
+    "dev:turbo": "NODE_OPTIONS=--max-old-space-size=2048 next dev --turbo --hostname 127.0.0.1 -p 3000",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --hostname 127.0.0.1 -p 3000",
+    "preview": "npm run build && npm run start",
     "lint": "eslint"
   },
   "dependencies": {

@@ -1,26 +1,133 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4f2ec;
+  --foreground: #1f1f1f;
+  --font-display: "Cormorant Garamond", "Noto Serif SC", Georgia, "Times New Roman",
+    serif;
+  --ink: #1f1f1f;
+  --muted: #6f6a63;
+  --paper: rgba(255, 255, 255, 0.82);
+  --wash-green: rgba(168, 186, 164, 0.35);
+  --wash-blue: rgba(176, 190, 204, 0.28);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), "Georgia", serif;
+}
+
+.echoes-page {
+  position: relative;
+  isolation: isolate;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.echoes-page::before,
+.echoes-page::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(48px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.echoes-page::before {
+  top: -4rem;
+  left: -5rem;
+  width: 18rem;
+  height: 18rem;
+  background: var(--wash-green);
+}
+
+.echoes-page::after {
+  top: 8rem;
+  right: -6rem;
+  width: 20rem;
+  height: 20rem;
+  background: var(--wash-blue);
+}
+
+.echoes-paper {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid rgba(31, 31, 31, 0.12);
+  box-shadow:
+    0 18px 40px rgba(31, 31, 31, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  border-radius: 18px 20px 16px 22px;
+}
+
+.echoes-paper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2.35rem,
+    rgba(31, 31, 31, 0.06) 2.35rem,
+    rgba(31, 31, 31, 0.06) calc(2.35rem + 1px)
+  );
+  pointer-events: none;
+}
+
+.echoes-paper textarea {
+  background: transparent;
+  color: var(--ink);
+}
+
+.echoes-paper textarea::placeholder {
+  color: rgba(31, 31, 31, 0.35);
+}
+
+.echoes-sketch-btn {
+  border: 1.5px solid rgba(31, 31, 31, 0.82);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--ink);
+  box-shadow: 1px 1px 0 rgba(31, 31, 31, 0.18);
+  transition:
+    background-color 0.35s ease,
+    transform 0.35s ease;
+}
+
+.echoes-sketch-btn:hover {
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.echoes-sketch-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.echoes-generate-btn {
+  border: 3px double rgba(31, 31, 31, 0.82);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink);
+  box-shadow: 0 10px 24px rgba(31, 31, 31, 0.05);
+}
+
+.echoes-generate-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.echoes-timeline {
+  border-left: 1px solid rgba(31, 31, 31, 0.12);
 }
